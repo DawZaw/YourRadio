@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" style="width:100vw; overflow-x: hidden;">
+  <head>
+    {% block title %}
+      <title>Your Radio</title>
+    {% endblock title %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" 
+      rel="stylesheet" 
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
+      crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  </head>
+  <body class="d-flex flex-column min-vh-100">
+    {% block nav %}
+      <nav class="sticky-top text-white bg-dark">
+        <div class="container">
+          <div class="d-flex flex-row justify-content-between py-2">
+            <div class="">
+              <h2>
+                <a class="my-auto ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" href="{% url 'index' %}">YourRadio</a>
+              </h2>
+            </div>
+            <div class="d-flex flex-row">
+              <a class="my-auto ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" href="{% url 'index' %}">Home</a>
+              <a class="my-auto ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" href="{% url 'albums' %}">Albums</a>
+              <a class="my-auto ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" href="">Users</a>
+              <p class="my-auto ms-3">|</p>
+              <a class="my-auto ms-3 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" href="">Login</a>
+              <a class="my-auto ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" href="">Sign up</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    {% endblock nav %}
+    <div class="container mx-auto py-3" style="width:60%">
+      {% block content %}
+      {% endblock content %}
+    </div>
+    {% block footer %}
+      <footer class="mt-auto text-center text-white bg-dark">
+        <p class="my-auto p-2">Dawid Zawadzki</p>
+      </footer>
+    {% endblock footer %}
+  </body>
+</html>

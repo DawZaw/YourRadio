@@ -1,0 +1,19 @@
+{% extends 'base_generic.html' %}
+
+
+{% block content %}
+<div class="d-flex flex-row flex-wrap">
+    {% for album in album_list  %}
+    <a href="{% url 'album_detail' album.artist.slug album.slug %}">
+        <div class="card m-3" style="max-width: 12rem;">
+            <div class="card-body p-0">
+                <img src="/{{ album.cover }}" alt="{{ album.title }}" style="width: 100%; height:200px">
+            </div>
+            <div class="card-header">
+                <p class="m-0">{{ album.title }}</p>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endblock content %}
