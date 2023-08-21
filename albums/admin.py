@@ -4,6 +4,7 @@ from .models import Album, Artist, Song, Genre
 
 # Register your models here.
 admin.site.register(Genre)
+admin.site.register(Song)
 
 
 @admin.register(Album)

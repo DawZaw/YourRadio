@@ -9,5 +9,5 @@ class Index(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["album_list"] = Album.objects.all()[:]
+        context["album_list"] = Album.objects.order_by('?')[:3]
         return context

@@ -9,7 +9,7 @@
         <a href="{% url 'album_detail' album.artist.slug album.slug %}" class="link-underline-dark link-underline-opacity-0">
             <div class="card m-3" style="max-width: 14rem;">
                 <div class="card-body p-0">
-                    <img src="/{{ album.cover }}" alt="{{ album.title }}" style="height:190px">
+                    <img src="/{{ album.cover }}" alt="{{ album.title }}" class="rounded-top" style="height:190px; width: 190px">
                 </div>
                 <div class="card-header">
                     <p class="m-0">{{ album.title }}</p>

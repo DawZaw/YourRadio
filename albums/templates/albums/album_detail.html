@@ -2,7 +2,7 @@
 
 {% block content %}
     <div class="row justify-content-center">
-        <div class="col-5 mx-2 mb-2 bg-dark p-2 rounded" style="min-width: 400px; height: fit-content;">
+        <div class="col-5 mx-2 mb-2 bg-dark p-2 rounded" style="width: 400px; height: fit-content;">
             <img src="/{{ album.cover }}" alt="" class="img-fluid rounded">
         </div>
         <div class="col-5 text-light" style="min-width: 400px;">
@@ -17,7 +17,7 @@
                 </div>
                 <div class="my-2">
                     <h5 class="m-0">Release date</h5>
-                    <h3 class="m-0">{{ album.release_date }}</h3>
+                    <h3 class="m-0">{{ album.release_date|date:"d F Y" }}</h3>
                 </div>
             </div>
             <div class="row bg-dark rounded px-2 py-3 mb-2">
@@ -28,6 +28,19 @@
             </div>
             <div class="row bg-dark rounded px-2 py-3 mb-2">
                 <h5>Tracklist</h5>
+                {% for track in tracklist %}
+                    <div class="row px-2 mx-auto mt-1">
+                        <div class="col-1"><p class="my-0">{{ track.no }}.</p></div>
+                        <div class="col"><p class="my-0">{{ track.title }}</p></div>
+                        <div class="col-3"><p class="my-0  text-end ">{{ track.length }}</p></div>
+                    </div>
+                    <hr class="m-0">
+                {% endfor %}
+                <div class="row px-2 mx-auto mt-2">
+                    <div class="col-1"></div>
+                    <div class="col-8"><p class="my-0"><b>Total</b></p></div>
+                    <div class="col-3"><p class="my-0 text-end" ><b>0{{ total }}</b></p></div>
+                </div>
             </div>    
         </div>
     </div>

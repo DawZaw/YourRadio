@@ -49,16 +49,13 @@ class Artist(models.Model):
 
 
 class Song(models.Model):
-    pos = models.IntegerField()
+    no = models.IntegerField(default=0)
     title = models.CharField(max_length=100)
     album = models.ForeignKey('Album', on_delete=models.CASCADE)
-    slug = models.SlugField(max_length=100, allow_unicode=True)
+    length = models.DurationField(default=0)
 
     def __str__(self):
         return self.title
-
-    def get_absolute_url(self):
-        return reverse("song_detail", kwargs={"slug": self.slug})
 
 
 class Genre(models.Model):
