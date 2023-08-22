@@ -1,15 +1,16 @@
 {% extends 'base_generic.html' %}
 
 {% block content %}
+    {% include 'letter_search.html' %}
     {% for artist in artist_list  %}
     {% if artist.album.all %}
-    <h2>{{ artist }}</h2>
+    <h2 id="{{ artist.name|first }}" style="scroll-margin-top: 62px">{{ artist }}</h2>
     <div class="d-flex flex-row flex-wrap">
         {% for album in artist.album.all %}
         <a href="{% url 'album_detail' album.artist.slug album.slug %}" class="link-underline-dark link-underline-opacity-0">
             <div class="card m-3" style="max-width: 14rem;">
                 <div class="card-body p-0">
-                    <img src="/{{ album.cover }}" alt="{{ album.title }}" class="rounded-top" style="height:190px; width: 190px">
+                    <img src="/{{ album.cover }}" alt="{{ album.title }}" class="rounded-top" style="height:190px; width: 190px" loading="lazy">
                 </div>
                 <div class="card-header">
                     <p class="m-0">{{ album.title }}</p>
