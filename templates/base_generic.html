@@ -12,6 +12,8 @@
       crossorigin="anonymous">
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <script src="https://kit.fontawesome.com/4e81b5bc51.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.4" integrity="sha384-zUfuhFKKZCbHTY6aRR46gxiqszMk5tcHjsVFxnUo8VMus4kHGVdIYVbOYYNlKmHV" crossorigin="anonymous"></script>
   </head>
   <body class="d-flex flex-column min-vh-100">
     {% block nav %}
@@ -24,6 +26,7 @@
               </h2>
             </div>
             <div class="d-flex flex-row">
+              {% include 'partials/search.html' %}
               <a class="my-auto ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" href="{% url 'index' %}">Home</a>
               <a class="my-auto ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" href="{% url 'albums' %}">Albums</a>
               <a class="my-auto ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" href="">Users</a>

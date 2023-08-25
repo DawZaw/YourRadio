@@ -8,4 +8,5 @@ urlpatterns = [
         views.AlbumDetailView.as_view(),
         name='album_detail',
     ),
+    path('search_album/', views.search_album, name="search_album"),
 ]

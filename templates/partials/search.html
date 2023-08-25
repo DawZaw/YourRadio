@@ -1,0 +1,16 @@
+<div style="width:300px">
+    <div class="search-box">
+        <button class="btn-search"><i class="fas fa-search"></i></button>
+        {% csrf_token %}
+        <input type="text"
+            hx-post="{% url 'search_album' %}"
+            hx-target="#results"
+            hx-trigger="keyup changed delay:500ms"
+            name="search"
+            class="input-search"
+            placeholder="Search album..." />
+        </form>
+    </div>
+    <div id="results" class="position-fixed" style="width:300px;">
+    </div>
+</div>

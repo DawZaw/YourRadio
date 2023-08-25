@@ -1,7 +1,6 @@
 {% extends 'base_generic.html' %}
 
 {% block content %}
-    {% include 'letter_search.html' %}
     {% for artist in artist_list  %}
     {% if artist.album.all %}
     <h2 id="{{ artist.name|first }}" style="scroll-margin-top: 62px">{{ artist }}</h2>

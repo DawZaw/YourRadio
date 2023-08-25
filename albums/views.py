@@ -31,3 +31,17 @@ class AlbumDetailView(DetailView):
 
 class ArtistDetailView(DetailView):
     model = Artist
+
+
+from django.views.decorators.csrf import csrf_exempt
+
+
+@csrf_exempt
+def search_album(request):
+    search_text = request.POST.get('search')
+    if search_text != "":
+        results = Album.objects.filter(title__istartswith=search_text)[:3]
+    else:
+        results = None
+    context = {'results': results}
+    return render(request, 'partials/search_results.html', context)
