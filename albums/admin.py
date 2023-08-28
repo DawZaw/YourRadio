@@ -4,7 +4,6 @@ from .models import Album, Artist, Song, Genre
 
 # Register your models here.
 admin.site.register(Genre)
-admin.site.register(Song)
 
 
 @admin.register(Album)
@@ -19,3 +18,8 @@ class ArtistAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
     list_display = ('name',)
     fields = ['name', 'active_years', 'type', 'slug']
+
+
+@admin.register(Song)
+class SongAdmin(admin.ModelAdmin):
+    list_display = ('title', 'album')

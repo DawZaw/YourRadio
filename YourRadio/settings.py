@@ -120,6 +120,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "albums/static")]
+
 ALBUM_MEDIA_URL = 'albums/media/'
 ALBUM_MEDIA_ROOT = os.path.join(BASE_DIR, 'albums/media')
 

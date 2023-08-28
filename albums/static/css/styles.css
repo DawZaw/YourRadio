@@ -2,6 +2,7 @@
     width: fit-content;
     height: fit-content;
     position: relative;
+    border-bottom: 1px #fff solid;
   }
   .input-search{
     height: 50px;

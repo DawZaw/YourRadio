@@ -11,7 +11,7 @@ class Album(models.Model):
         'Artist', on_delete=models.SET_NULL, null=True, related_name='album'
     )
     cover = models.ImageField(
-        upload_to='albums/media/images/', default='albums/static/default_album.png'
+        upload_to='albums/media/images/', default='static/img/default_album.png'
     )
     genre = models.ManyToManyField('Genre')
     release_date = models.DateField()
