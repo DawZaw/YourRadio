@@ -17,7 +17,7 @@ class AlbumAdmin(admin.ModelAdmin):
 class ArtistAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
     list_display = ('name',)
-    fields = ['name', 'active_years', 'type', 'slug']
+    fields = ['photo', 'name', 'start_year', 'end_year', 'type', 'slug']
 
 
 @admin.register(Song)

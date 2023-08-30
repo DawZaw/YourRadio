@@ -11,7 +11,7 @@ class Album(models.Model):
         'Artist', on_delete=models.SET_NULL, null=True, related_name='album'
     )
     cover = models.ImageField(
-        upload_to='artists/media/images/', default='static/img/default_album.png'
+        upload_to='artists/media/images/albums/', default='static/img/default_album.png'
     )
     genre = models.ManyToManyField('Genre')
     release_date = models.DateField()
@@ -31,7 +31,12 @@ class Album(models.Model):
 
 class Artist(models.Model):
     name = models.CharField(max_length=100)
-    active_years = models.DateField()
+    start_year = models.DateField()
+    end_year = models.DateField(null=True, blank=True, default=None)
+    photo = models.ImageField(
+        upload_to='artists/media/images/artists/',
+        default='static/img/default_artist.png',
+    )
 
     ARTIST_TYPE = (('b', 'Band'), ('s', 'Solo Artist'))
     type = models.CharField(

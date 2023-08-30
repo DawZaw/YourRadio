@@ -5,6 +5,20 @@ import datetime
 from .models import Album, Artist, Song
 
 
+def search_view(request):
+    search = request.GET.get("search")
+
+    if search != "":
+        albums = Album.objects.filter(title__istartswith=search)[:3]
+        artists = Artist.objects.filter(name__istartswith=search)[:3]
+    else:
+        albums = None
+        artists = None
+    context = {'albums': albums, 'artists': artists}
+
+    return render(request, 'partials/search_results.html', context)
+
+
 # Create your views here.
 class AlbumListView(ListView):
     model = Artist
@@ -31,17 +45,3 @@ class AlbumDetailView(DetailView):
 
 class ArtistDetailView(DetailView):
     model = Artist
-
-
-from django.views.decorators.csrf import csrf_exempt
-
-
-@csrf_exempt
-def search_album(request):
-    search_text = request.POST.get('search')
-    if search_text != "":
-        results = Album.objects.filter(title__istartswith=search_text)[:3]
-    else:
-        results = None
-    context = {'results': results}
-    return render(request, 'partials/search_results.html', context)

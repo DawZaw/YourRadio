@@ -23,11 +23,18 @@ def populate_artists():
         reader = csv.reader(file)
 
         for row in reader:
-            active_years = datetime.datetime.strptime(row[1], "%Y-%m-%d")
+            start_year = datetime.datetime.strptime(row[1], "%Y-%m-%d")
+            end_year = None
+            if row[2]:
+                end_year = datetime.datetime.strptime(row[2], "%Y-%m-%d")
             artist, _ = Artist.objects.get_or_create(
                 name=row[0],
-                active_years=active_years,
-                type=row[2],
+                start_year=start_year,
+                end_year=end_year,
+                photo='artists/media/images/artists/'
+                + slugify(f'{row[0]}', allow_unicode=True)
+                + '.jpg',
+                type=row[3],
                 slug=slugify(row[0], allow_unicode=True),
             )
             artist.save()
@@ -45,7 +52,7 @@ def populate_albums():
                 title=row[0],
                 artist=artist,
                 release_date=release_date,
-                cover='albums/media/images/'
+                cover='artists/media/images/albums/'
                 + slugify(f'{row[1]}-{tmp_title}', allow_unicode=True)
                 + '.webp',
                 slug=slugify(tmp_title, allow_unicode=True),

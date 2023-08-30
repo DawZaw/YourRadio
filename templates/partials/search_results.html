@@ -1,23 +1,38 @@
-{% if results is not None %}
-    {% if results %}
-        <ul class="list-group">
-            {% for album in results %}
-            <a href="{% url 'album_detail' album.artist.slug album.slug %}" class="link-underline-dark link-underline-opacity-0">
-                <li class="list-group-item d-flex justify-content-start align-items-center p-0 rounded">
-                        <img src="/{{ album.cover }}" alt="" class="img-fluid rounded me-2" style="height:80px; width: 80px;">
-                        <div>
-                            <p class="m-0">{{ album.artist }}</p>
-                            <p class="m-0">{{ album.title }}</p>
-                        </div>
-                    </li>        
-                </a>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                No results...
+<div class="border-dark shadow">
+    <ul class="list-group rounded">
+        {% if artists or albums is not None %}
+        {% if artists %}
+        <li class="list-group-item border-0 d-flex justify-content-start align-items-center p-2 bg-dark text-light">ARTISTS</li>
+        {% for artist in artists %}
+        <a href="{% url 'artist_detail' artist.slug %}" class="link-underline-dark link-underline-opacity-0">
+            <li class="list-group-item border-0 d-flex justify-content-start align-items-center p-0">
+                <img src="/{{ artist.photo }}" alt="" class="img-fluid  me-2" style="height:80px; width: 80px;">
+                <div>
+                    <p class="m-0">{{ artist.name }}</p>
+                </div>
             </li>        
-        </ul>
+        </a>
+        {% endfor %}
+        {% endif %}
+        {% if albums %}
+        <li class="list-group-item border-0 d-flex justify-content-start align-items-center p-2 bg-dark text-light">ALBUMS</li>
+        {% for album in albums %}
+        <a href="{% url 'album_detail' album.artist.slug album.slug %}" class="link-underline-dark link-underline-opacity-0">
+            <li class="list-group-item border-0 d-flex justify-content-start align-items-center p-0">
+                <img src="/{{ album.cover }}" alt="" class="img-fluid  me-2" style="height:80px; width: 80px;">
+                <div>
+                    <p class="m-0">{{ album.title }}</p>
+                    <p class="m-0">{{ album.artist }}</p>
+                </div>
+            </li>        
+        </a>
+        {% endfor %}
+        {% endif %}
+        {% if not albums and not artists %}
+        <li class="list-group-item border-0 d-flex justify-content-between align-items-center hide-element">
+            No results...
+        </li>        
     {% endif %}
 {% endif %}
+</ul>
+</div>

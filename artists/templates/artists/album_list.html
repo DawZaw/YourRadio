@@ -3,9 +3,11 @@
 {% block content %}
     {% for artist in artist_list  %}
     {% if artist.album.all %}
-    <a href="{% url 'artist_detail' artist.slug %}" class="link-underline-dark link-underline-opacity-0">
-        <h2 class="text-dark" style="scroll-margin-top: 62px">{{ artist }}</h2>
-    </a>
+    <h2>
+        <a href="{% url 'artist_detail' artist.slug %}" class="text-dark link-underline-dark link-underline-opacity-0 link-underline-opacity-50-hover">
+            {{ artist }}
+        </a>
+    </h2>
     <div class="d-flex flex-row flex-wrap">
         {% for album in artist.album.all %}
         <a href="{% url 'album_detail' album.artist.slug album.slug %}" class="link-underline-dark link-underline-opacity-0">
