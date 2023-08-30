@@ -17,7 +17,9 @@
             <div class="row bg-dark rounded p-2 mb-2">
                 <div class="my-2">
                     <h5 class="m-0">Artist</h5>
-                    <h3 class="m-0">{{ album.artist }}</h3>
+                    <a href="{% url 'artist_detail' album.artist.slug %}" class="link-underline-dark link-underline-opacity-0">
+                        <h3 class="m-0 text-light">{{ album.artist }}</h3>
+                    </a>
                 </div>
                 <div class="my-2">
                     <h5 class="m-0">Album</h5>

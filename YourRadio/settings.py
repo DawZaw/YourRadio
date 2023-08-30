@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-    'albums.apps.AlbumsConfig',
+    'artists.apps.ArtistsConfig',
 ]
 
 MIDDLEWARE = [
@@ -120,10 +120,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "albums/static")]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "artists/static")]
 
-ALBUM_MEDIA_URL = 'albums/media/'
-ALBUM_MEDIA_ROOT = os.path.join(BASE_DIR, 'albums/media')
+ALBUM_MEDIA_URL = 'artists/media/'
+ALBUM_MEDIA_ROOT = os.path.join(BASE_DIR, 'artists/media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

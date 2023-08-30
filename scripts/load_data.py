@@ -1,5 +1,5 @@
 from django.utils.text import slugify
-from albums.models import Genre, Artist, Song, Album
+from artists.models import Genre, Artist, Song, Album
 import datetime
 import csv
 
@@ -19,7 +19,7 @@ def clear_data():
 
 
 def populate_artists():
-    with open('artists.csv') as file:
+    with open('scripts/artists.csv') as file:
         reader = csv.reader(file)
 
         for row in reader:
@@ -34,20 +34,21 @@ def populate_artists():
 
 
 def populate_albums():
-    with open('albums.csv') as file:
+    with open('scripts/albums.csv') as file:
         reader = csv.reader(file)
 
         for row in reader:
             artist, _ = Artist.objects.get_or_create(name=row[1])
             release_date = datetime.datetime.strptime(row[2], "%Y-%m-%d")
+            tmp_title = row[0].replace(".", "-")
             album, _ = Album.objects.get_or_create(
                 title=row[0],
                 artist=artist,
                 release_date=release_date,
                 cover='albums/media/images/'
-                + slugify(f'{row[1]}-{row[0]}', allow_unicode=True)
+                + slugify(f'{row[1]}-{tmp_title}', allow_unicode=True)
                 + '.webp',
-                slug=slugify(row[0], allow_unicode=True),
+                slug=slugify(tmp_title, allow_unicode=True),
             )
             genres = row[3].split(";")
             for genre_name in genres:
@@ -57,7 +58,7 @@ def populate_albums():
 
 
 def populate_songs():
-    with open('songs.csv') as file:
+    with open('scripts/songs.csv') as file:
         reader = csv.reader(file)
 
         for row in reader:

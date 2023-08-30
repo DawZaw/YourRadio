@@ -3,7 +3,9 @@
 {% block content %}
     {% for artist in artist_list  %}
     {% if artist.album.all %}
-    <h2 id="{{ artist.name|first }}" style="scroll-margin-top: 62px">{{ artist }}</h2>
+    <a href="{% url 'artist_detail' artist.slug %}" class="link-underline-dark link-underline-opacity-0">
+        <h2 class="text-dark" style="scroll-margin-top: 62px">{{ artist }}</h2>
+    </a>
     <div class="d-flex flex-row flex-wrap">
         {% for album in artist.album.all %}
         <a href="{% url 'album_detail' album.artist.slug album.slug %}" class="link-underline-dark link-underline-opacity-0">
@@ -12,7 +14,7 @@
                     <img src="/{{ album.cover }}" alt="{{ album.title }}" class="rounded-top" style="height:190px; width: 190px" loading="lazy">
                 </div>
                 <div class="card-header">
-                    <p class="m-0">{{ album.title }}</p>
+                    <p class="m-0 text-truncate" style="max-width: 158px">{{ album.title }}</p>
                 </div>
             </div>
         </a>

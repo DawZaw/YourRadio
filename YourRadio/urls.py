@@ -23,5 +23,5 @@ from . import settings
 urlpatterns = [
     path('', views.Index.as_view(), name='index'),
     path('admin/', admin.site.urls),
-    path('albums/', include('albums.urls')),
+    path('artists/', include('artists.urls')),
 ] + static(settings.ALBUM_MEDIA_URL, document_root=settings.ALBUM_MEDIA_ROOT)

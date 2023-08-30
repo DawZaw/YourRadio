@@ -8,7 +8,7 @@ from .models import Album, Artist, Song
 # Create your views here.
 class AlbumListView(ListView):
     model = Artist
-    template_name = 'albums/album_list.html'
+    template_name = 'artists/album_list.html'
 
     def get_queryset(self):
         return Artist.objects.order_by('name')
