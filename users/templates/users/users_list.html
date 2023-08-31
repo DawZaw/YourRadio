@@ -1,0 +1,18 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+{% block content %}
+    <div class="d-flex flex-row flex-wrap">
+        {% for user in siteuser_list  %}
+        <a href="{% url 'user_detail' user %}" class="link-underline-dark link-underline-opacity-0">
+            <div class="card m-3" style="max-width: 14rem;">
+                <div class="card-body p-0">
+                    <img src="/{{ user.avatar }}" alt="{{ user }}" class="rounded-top" style="height:190px; width: 190px" loading="lazy">
+                </div>
+                <div class="card-header">
+                    <p class="m-0 text-truncate" style="max-width: 158px">{{ user }}</p>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+{% endblock content %}

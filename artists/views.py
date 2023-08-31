@@ -19,7 +19,6 @@ def search_view(request):
     return render(request, 'partials/search_results.html', context)
 
 
-# Create your views here.
 class AlbumListView(ListView):
     model = Artist
     template_name = 'artists/album_list.html'

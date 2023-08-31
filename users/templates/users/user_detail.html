@@ -1,0 +1,56 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+{% block title %}
+    <title>YourRadio - {{ siteuser }}</title>
+{% endblock title %}
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-5 text-light m-1" style="min-width: 400px;">
+            <div class="row bg-dark rounded mb-1 p-2">
+                <img src="/{{ siteuser.avatar }}" alt="{{ siteuser }}" class="rounded p-0">
+            </div>
+        </div>
+        <div class="col-5 text-light m-1" style="min-width: 400px;">
+            <div class="row bg-dark rounded p-2 mb-2">
+                <div class="my-2">
+                    <h5 class="m-0 opacity-50">@{{ siteuser }}</h5>
+                    <h3 class="m-0">{{ siteuser.first_name }} {{ siteuser.last_name }}</h3>
+                </div>
+                <div class="my-2">
+                    <h5 class="m-0">Joined</h5>
+                    <h3 class="m-0">
+                        {{ siteuser.date_joined|date:"d.m.Y" }}
+                    </h3>
+                </div>
+            </div>         
+            <div class="row bg-dark rounded p-2 mb-1">
+                <div class="my-2">
+                    <h5 class="m-0">Favorite genres</h5>
+                    {% for genre in favorite_genres %}
+                        <h3 class="m-0">{{ genre }}</h3>
+                    {% endfor %}
+                </div>
+            </div>         
+        </div>
+        <div class="row justify-content-center">
+            {% if siteuser.favorite_albums.all %}
+            <h2 class="text-dark">Favorite albums</h2>
+            <div class="d-flex flex-row flex-wrap">
+                {% for album in siteuser.favorite_albums.all %}
+                <a href="{% url 'album_detail' album.artist.slug album.slug %}" class="link-underline-dark link-underline-opacity-0">
+                    <div class="card m-3" style="max-width: 14rem;">
+                        <div class="card-body p-0">
+                            <img src="/{{ album.cover }}" alt="{{ album.title }}" class="rounded-top" style="height:190px; width: 190px" loading="lazy">
+                        </div>
+                        <div class="card-header">
+                            <p class="m-0 text-truncate" style="max-width: 158px">{{ album.title }}</p>
+                            <p class="m-0 text-truncate" style="max-width: 158px">{{ album.artist }}</p>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>~
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

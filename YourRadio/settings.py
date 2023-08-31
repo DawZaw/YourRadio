@@ -39,8 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'artists.apps.ArtistsConfig',
+    'users.apps.UsersConfig',
     'django_extensions',
 ]
+
+AUTH_USER_MODEL = 'users.SiteUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -120,10 +123,16 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "artists/static")]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static/"),
+    os.path.join(BASE_DIR, "artists/static"),
+    os.path.join(BASE_DIR, "users/static"),
+]
 
 ALBUM_MEDIA_URL = 'artists/media/'
 ALBUM_MEDIA_ROOT = os.path.join(BASE_DIR, 'artists/media')
+USERS_MEDIA_URL = 'users/media/'
+USERS_MEDIA_ROOT = os.path.join(BASE_DIR, 'users/media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

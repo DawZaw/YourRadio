@@ -2,7 +2,6 @@ from django.db import models
 from django.urls import reverse
 
 
-# Create your models here.
 class Album(models.Model):
     """Model representing an album."""
 

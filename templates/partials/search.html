@@ -1,3 +1,4 @@
+{% load static %}
 <div style="width:300px">
     <div class="search-box">
         <button class="btn-search"><i class="fas fa-search"></i></button>
@@ -9,8 +10,8 @@
             onsubmit="event.preventDefault();">
             <input 
                 type="text" 
-                onblur="document.getElementById('results').classList.add('d-none');"
-                onfocus="document.getElementById('results').classList.remove('d-none');"
+                onblur=onBlur()
+                onfocus=onFocus()
                 name="search" 
                 class="input-search" 
                 placeholder="Search..." />
