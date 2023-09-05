@@ -46,7 +46,7 @@
                 {% endif %}
             </div>         
         </div>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mt-2">
             <h2 class="text-dark">Discography</h2>
             <div class="d-flex flex-row flex-wrap">
                 {% for album in artist.album.all %}
@@ -63,5 +63,6 @@
                 {% endfor %}
             </div>
         </div>
+        {% include '../comments/comment_section.html' with comments=comments %}
     </div>
 {% endblock content %}

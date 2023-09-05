@@ -1,7 +1,7 @@
 function onBlur() {
     setTimeout(() => {
         document.getElementById('results').classList.add('d-none');
-    }, 100);
+    }, 150);
 }
 
 function onFocus() {

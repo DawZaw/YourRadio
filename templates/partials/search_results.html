@@ -1,8 +1,8 @@
 <div class="border-dark shadow">
-    <ul class="list-group rounded">
+    <ul class="list-group">
         {% if artists or albums is not None %}
         {% if artists %}
-        <li class="list-group-item border-0 d-flex justify-content-start align-items-center p-2 bg-dark text-light">ARTISTS</li>
+        <li class="list-group-item border-0 rounded-0 d-flex justify-content-start align-items-center p-2 bg-dark text-light">ARTISTS</li>
         {% for artist in artists %}
         <a href="{% url 'artist_detail' artist.slug %}" class="link-underline-dark link-underline-opacity-0">
             <li class="list-group-item border-0 d-flex justify-content-start align-items-center p-0">
@@ -15,7 +15,7 @@
         {% endfor %}
         {% endif %}
         {% if albums %}
-        <li class="list-group-item border-0 d-flex justify-content-start align-items-center p-2 bg-dark text-light">ALBUMS</li>
+        <li class="list-group-item border-0 rounded-0 d-flex justify-content-start align-items-center p-2 bg-dark text-light">ALBUMS</li>
         {% for album in albums %}
         <a href="{% url 'album_detail' album.artist.slug album.slug %}" class="link-underline-dark link-underline-opacity-0">
             <li class="list-group-item border-0 d-flex justify-content-start align-items-center p-0">
@@ -29,7 +29,7 @@
         {% endfor %}
         {% endif %}
         {% if not albums and not artists %}
-        <li class="list-group-item border-0 d-flex justify-content-between align-items-center hide-element">
+        <li class="list-group-item border-0 rounded-0 d-flex justify-content-between align-items-center hide-element">
             No results...
         </li>        
     {% endif %}

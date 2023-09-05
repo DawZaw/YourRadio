@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'artists.apps.ArtistsConfig',
     'users.apps.UsersConfig',
+    'comments.apps.CommentsConfig',
     'django_extensions',
 ]
 

@@ -1,8 +1,11 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView
 import datetime
+from django.shortcuts import render
+from django.utils.text import slugify
+from django.core.paginator import Paginator
+from django.views.generic import ListView, DetailView
 
 from .models import Album, Artist, Song
+from comments.models import Comment
 
 
 def search_view(request):
@@ -39,8 +42,29 @@ class AlbumDetailView(DetailView):
             total += track.length
             track.length = str(track.length)[2:]
         context["total"] = total
+
+        # Comment section
+        slug = slugify(f"{album.artist.slug}-{album.slug}")
+        comments = Comment.objects.filter(page=slug)
+        paginator = Paginator(comments, 5)
+        page = self.request.GET.get('page', 1)
+        comments = paginator.get_page(page)
+        context['comments'] = comments
         return context
 
 
 class ArtistDetailView(DetailView):
     model = Artist
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        artist = self.object
+
+        # Comment section
+        slug = artist.slug
+        comments = Comment.objects.filter(page=slug)
+        paginator = Paginator(comments, 5)
+        page = self.request.GET.get('page', 1)
+        comments = paginator.get_page(page)
+        context['comments'] = comments
+        return context
