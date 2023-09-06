@@ -1,5 +1,7 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.views.generic import ListView, DetailView, View
 import datetime
 
 from artists.models import Album
@@ -39,3 +41,7 @@ class UserDetailView(DetailView):
             genres_count, key=lambda item: item[1], reverse=True
         )[:4]
         return context
+
+
+class LoginUser(View):
+    ...

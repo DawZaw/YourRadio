@@ -38,10 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'artists.apps.ArtistsConfig',
-    'users.apps.UsersConfig',
-    'comments.apps.CommentsConfig',
     'django_extensions',
+    'artists',
+    'users',
+    'comments',
 ]
 
 AUTH_USER_MODEL = 'users.SiteUser'

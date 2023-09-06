@@ -2,16 +2,16 @@
 <div class="col-10 m-auto">
     <form action="" class="d-inline">
         <div class="d-flex">
-            <textarea class="form-control m-1" aria-label="With textarea" placeholder="Type your comment here." rows=2 style="resize:none"></textarea>
+            <textarea id="comment-text" class="form-control m-1" placeholder="Type your comment here." oninput=countText() rows=2 style="resize:none"></textarea>
             <div class="d-flex flex-column" id="button-addon4">
-              <button class="btn btn-outline-secondary mt-1" style="height:79px" type="button">Submit</button>
+              <button id="submit-button" class="btn btn-outline-secondary mt-1" style="height:79px" type="button">Submit</button>
             </div>
           </div>
     </form>
     <div id="the-count" style="float:right">
         <span id="current">0</span>
-        <span id="maximum">/ 300</span>
-      </div>
+        <span id="maximum">/ 250</span>
+    </div>
     <div id="comment-list">
         {% include './comment_list.html' %}
     </div>
