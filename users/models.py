@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
 from artists.models import Album
+from django.db.models.functions import Lower
 
 
 class SiteUser(AbstractUser):
@@ -19,4 +20,4 @@ class SiteUser(AbstractUser):
         return self.username
 
     class Meta:
-        ordering = ['username']
+        ordering = [Lower('username')]

@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'users',
     'comments',
 ]
-
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 AUTH_USER_MODEL = 'users.SiteUser'
 
 MIDDLEWARE = [

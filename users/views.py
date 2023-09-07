@@ -1,10 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+
+from django.urls import reverse_lazy
 from django.contrib import messages
-from django.views.generic import ListView, DetailView, View
+from django.views.generic import ListView, DetailView, FormView
+from django.contrib.auth.forms import UserCreationForm
 import datetime
 
 from artists.models import Album
+from .forms import RegisterUserForm
 from .models import SiteUser
 
 
@@ -43,5 +47,15 @@ class UserDetailView(DetailView):
         return context
 
 
-class LoginUser(View):
-    ...
+class RegisterView(FormView):
+    template_name = "users/register.html"
+    form_class = RegisterUserForm
+    redirect_authenticated_user = True
+    success_url = reverse_lazy('index')
+
+    def form_valid(self, form):
+        user = form.save()
+        if user:
+            login(self.request, user)
+
+        return super(RegisterView, self).form_valid(form)
