@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-
+from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, FormView
@@ -14,10 +14,10 @@ from .models import SiteUser
 
 class UsersListView(ListView):
     model = SiteUser
-    template_name = 'users/users_list.html'
+    template_name = "users/users_list.html"
 
     class Meta:
-        ordering = 'username'
+        ordering = "username"
 
     def get_queryset(self):
         return SiteUser.objects.exclude(is_superuser=True)
@@ -27,7 +27,7 @@ class UserDetailView(DetailView):
     model = SiteUser
     slug_field = "username"
     slug_url_kwarg = "username"
-    template_name = 'users/user_detail.html'
+    template_name = "users/user_detail.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -51,7 +51,7 @@ class RegisterView(FormView):
     template_name = "users/register.html"
     form_class = RegisterUserForm
     redirect_authenticated_user = True
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy("index")
 
     def form_valid(self, form):
         user = form.save()
@@ -59,3 +59,21 @@ class RegisterView(FormView):
             login(self.request, user)
 
         return super(RegisterView, self).form_valid(form)
+
+
+def add_album(request, **kwargs):
+    if request.method == "POST":
+        album = Album.objects.get(id=kwargs["album_id"])
+        user = SiteUser.objects.get(id=kwargs["user_id"])
+        user.favorite_albums.add(album)
+        messages.info(request, "Album added to favorites.")
+        return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+
+
+def remove_album(request, **kwargs):
+    if request.method == "POST":
+        album = Album.objects.get(id=kwargs["album_id"])
+        user = SiteUser.objects.get(id=kwargs["user_id"])
+        user.favorite_albums.remove(album)
+        messages.info(request, "Album removed from favorites.")
+        return HttpResponseRedirect(request.META.get("HTTP_REFERER"))

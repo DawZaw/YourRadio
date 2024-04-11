@@ -7,11 +7,11 @@ from django.db.models.functions import Lower
 
 class SiteUser(AbstractUser):
     avatar = models.ImageField(
-        upload_to='users/media/images/avatars/',
-        default='static/img/default_user.png',
+        upload_to="users/media/images/avatars/",
+        default="static/img/default_user.png",
     )
     favorite_albums = models.ManyToManyField(Album, blank=True)
-    follows = models.ManyToManyField('self', blank=True)
+    follows = models.ManyToManyField("self", blank=True)
 
     def get_absolute_url(self):
         return reverse("user_detail", kwargs={"slug": self.username})
@@ -20,4 +20,4 @@ class SiteUser(AbstractUser):
         return self.username
 
     class Meta:
-        ordering = [Lower('username')]
+        ordering = [Lower("username")]

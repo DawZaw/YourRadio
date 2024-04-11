@@ -1,8 +1,9 @@
 {% for comment in comments %}
+
 <div class='row bg-dark text-light rounded p-2 my-1'>
     <div class='col-auto'>
         <div class="row">
-            <a href="{% url 'user_detail' comment.user %}" class="rounded">
+            <a href="{% url 'users:user_detail' comment.user %}" class="rounded">
                 <img src="/{{ comment.user.avatar }}" alt="{{ comment.user }}" style="min-width:100px;width:100px;">
             </a>
         </div>
@@ -10,8 +11,10 @@
     <div class="col">
         <div class="row d-flex">
             <p class="d-flex justify-content-between">
-                <a href="{% url 'user_detail' comment.user %}" class="text-light link-underline-light link-underline-opacity-0 link-underline-opacity-50-hover">
-                    <b>{{ comment.user.first_name }} {{ comment.user.last_name }}</b> <span class="opacity-50">@{{ comment.user }}</span>
+                <a href="{% url 'users:user_detail' comment.user %}"
+                    class="text-light link-underline-light link-underline-opacity-0 link-underline-opacity-50-hover">
+                    <b>{{ comment.user.first_name }} {{ comment.user.last_name }}</b> <span class="opacity-50">@{{
+                        comment.user }}</span>
                 </a>
                 <span>
                     {{ comment.date|date:"H:i A • M j, o" }}
@@ -22,7 +25,7 @@
             <p class="text-justify">
                 {{ comment.post }}
             </p>
-        </div>        
+        </div>
     </div>
-</div>    
+</div>
 {% endfor %}

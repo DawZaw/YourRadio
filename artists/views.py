@@ -17,17 +17,17 @@ def search_view(request):
     else:
         albums = None
         artists = None
-    context = {'albums': albums, 'artists': artists}
+    context = {"albums": albums, "artists": artists}
 
-    return render(request, 'partials/search_results.html', context)
+    return render(request, "partials/search_results.html", context)
 
 
 class AlbumListView(ListView):
     model = Artist
-    template_name = 'artists/album_list.html'
+    template_name = "artists/album_list.html"
 
     def get_queryset(self):
-        return Artist.objects.order_by('name')
+        return Artist.objects.order_by("name")
 
 
 class AlbumDetailView(DetailView):
@@ -36,9 +36,9 @@ class AlbumDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         album = self.object
-        context["tracklist"] = album.song_set.all().order_by('no')
+        context["tracklist"] = album.song_set.all().order_by("no")
         total = datetime.timedelta(0, 0)
-        for track in context['tracklist']:
+        for track in context["tracklist"]:
             total += track.length
             track.length = str(track.length)[2:]
         context["total"] = total
@@ -47,9 +47,9 @@ class AlbumDetailView(DetailView):
         slug = slugify(f"{album.artist.slug}-{album.slug}")
         comments = Comment.objects.filter(page=slug)
         paginator = Paginator(comments, 5)
-        page = self.request.GET.get('page', 1)
+        page = self.request.GET.get("page", 1)
         comments = paginator.get_page(page)
-        context['comments'] = comments
+        context["comments"] = comments
         return context
 
 
@@ -64,7 +64,7 @@ class ArtistDetailView(DetailView):
         slug = artist.slug
         comments = Comment.objects.filter(page=slug)
         paginator = Paginator(comments, 5)
-        page = self.request.GET.get('page', 1)
+        page = self.request.GET.get("page", 1)
         comments = paginator.get_page(page)
-        context['comments'] = comments
+        context["comments"] = comments
         return context

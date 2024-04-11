@@ -13,6 +13,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
     <script src="{% static 'js/main.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/4e81b5bc51.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/htmx.org@1.9.4" integrity="sha384-zUfuhFKKZCbHTY6aRR46gxiqszMk5tcHjsVFxnUo8VMus4kHGVdIYVbOYYNlKmHV" crossorigin="anonymous"></script>
     {% block head %}
@@ -31,18 +32,21 @@
             <div class="d-flex flex-row align-items-center">
               {% include 'partials/search.html' %}
               <a class="my-auto ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" href="{% url 'index' %}">Home</a>
-              <a class="my-auto ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" href="{% url 'artists' %}">Artists</a>
-              <a class="my-auto ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" href="{% url 'users' %}">Users</a>
+              <a class="my-auto ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" href="{% url 'artists:artists' %}">Artists</a>
+              <a class="my-auto ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" href="{% url 'users:users' %}">Users</a>
               <p class="my-auto ms-3">|</p>
               {% if user.is_authenticated %}
-              <form method="post" action="{% url 'logout' %}?next={{ request.path }}">
-                {% csrf_token %}
-                <button type="submit" class="btn-link my-auto ms-3 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">Logout</button>
-              </form>
-                <a href="{% url 'user_detail' user %}"><img src="/{{ user.avatar }}" alt="{{ user }}" class="rounded-circle bg-light ms-2" width="30px"></a>
+                <form method="post" action="{% url 'logout' %}?next={{ request.path }}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn-link my-auto ms-3 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover">Logout</button>
+                </form>
+                <a class="my-auto ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" href="{% url 'users:user_detail' user %}">
+                  <img src="/{{ user.avatar }}" alt="{{ user }}" class="rounded-circle bg-light ms-2" width="30px">
+                  {{ user.username }}
+                </a>
               {% else %}
                 <a class="my-auto ms-3 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" href="{% url 'login' %}?next={{ request.path }}">Login</a>
-                <a class="my-auto ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" href="{% url 'register' %}">Sign up</a>
+                <a class="my-auto ms-2 link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" href="{% url 'users:register' %}">Sign up</a>
               {% endif %}
             </div>
           </div>

@@ -13,12 +13,12 @@ class RegisterUserForm(UserCreationForm):
     class Meta:
         model = SiteUser
         fields = (
-            'first_name',
-            'last_name',
-            'email',
-            'username',
-            'password1',
-            'password2',
+            "first_name",
+            "last_name",
+            "email",
+            "username",
+            "password1",
+            "password2",
         )
 
     def __init__(self, *args: Any, **kwargs: Any):

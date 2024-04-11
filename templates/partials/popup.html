@@ -1,0 +1,7 @@
+{% if messages %}
+{% for message in messages %}
+<div class='m-auto border rounded shadow d-flex justify-content-center align-items-center bg-dark text-light popup' style="width:375px">
+    <span class="popup-text">{{ message }}</span>
+</div>
+{% endfor %}
+{% endif %}

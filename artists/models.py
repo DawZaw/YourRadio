@@ -7,20 +7,20 @@ class Album(models.Model):
 
     title = models.CharField(max_length=100)
     artist = models.ForeignKey(
-        'Artist', on_delete=models.SET_NULL, null=True, related_name='album'
+        "Artist", on_delete=models.SET_NULL, null=True, related_name="album"
     )
     cover = models.ImageField(
-        upload_to='artists/media/images/albums/', default='static/img/default_album.png'
+        upload_to="artists/media/images/albums/", default="static/img/default_album.png"
     )
-    genre = models.ManyToManyField('Genre')
+    genre = models.ManyToManyField("Genre")
     release_date = models.DateField()
     slug = models.SlugField(max_length=100, allow_unicode=True)
 
     class Meta:
-        ordering = ['release_date', 'title']
+        ordering = ["release_date", "title"]
 
     def __str__(self):
-        return self.artist.name + ' - ' + self.title
+        return self.artist.name + " - " + self.title
 
     def get_absolute_url(self):
         return reverse(
@@ -33,15 +33,15 @@ class Artist(models.Model):
     start_year = models.DateField()
     end_year = models.DateField(null=True, blank=True, default=None)
     photo = models.ImageField(
-        upload_to='artists/media/images/artists/',
-        default='static/img/default_artist.png',
+        upload_to="artists/media/images/artists/",
+        default="static/img/default_artist.png",
     )
 
-    ARTIST_TYPE = (('b', 'Band'), ('s', 'Solo Artist'))
+    ARTIST_TYPE = (("b", "Band"), ("s", "Solo Artist"))
     type = models.CharField(
         max_length=1,
         choices=ARTIST_TYPE,
-        help_text='Artist type (Band, Solo)',
+        help_text="Artist type (Band, Solo)",
     )
     slug = models.SlugField(max_length=100, allow_unicode=True)
 
@@ -55,7 +55,7 @@ class Artist(models.Model):
 class Song(models.Model):
     no = models.IntegerField(default=0)
     title = models.CharField(max_length=100)
-    album = models.ForeignKey('Album', on_delete=models.CASCADE)
+    album = models.ForeignKey("Album", on_delete=models.CASCADE)
     length = models.DurationField(default=0)
 
     def __str__(self):

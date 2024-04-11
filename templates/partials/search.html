@@ -4,7 +4,7 @@
         <button class="btn-search"><i class="fas fa-search"></i></button>
         <form 
             id="searchBar"
-            hx-get="{% url 'search' %}"
+            hx-get="{% url 'artists:search' %}"
             hx-target="#results"
             hx-trigger="input delay:300ms"
             onsubmit="event.preventDefault();">

@@ -5,7 +5,7 @@
 <h3>Check out those Artists:</h3>
 <div class="d-flex flex-row flex-wrap">
     {% for artist in artist_list %}
-        <a href="{% url 'artist_detail' artist.slug %}" class="link-underline-dark link-underline-opacity-0">
+        <a href="{% url 'artists:artist_detail' artist.slug %}" class="link-underline-dark link-underline-opacity-0">
             <div class="card m-3" style="max-width: 16rem;">
                 <div class="card-body p-0">
                     <img src="/{{ artist.photo }}" alt="{{ artist.name }}" class="rounded-top" style="height:250px; width: 250px">
@@ -20,7 +20,7 @@
 <h3>Check out those albums:</h3>
 <div class="d-flex flex-row flex-wrap">
     {% for album in album_list %}
-        <a href="{% url 'album_detail' album.artist.slug album.slug %}" class="link-underline-dark link-underline-opacity-0">
+        <a href="{% url 'artists:album_detail' album.artist.slug album.slug %}" class="link-underline-dark link-underline-opacity-0">
             <div class="card m-3" style="max-width: 16rem;">
                 <div class="card-body p-0">
                     <img src="/{{ album.cover }}" alt="{{ album.title }}" class="rounded-top" style="height:250px; width: 250px">

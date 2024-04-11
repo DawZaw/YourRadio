@@ -2,27 +2,30 @@
 <div class="col-10 m-auto">
     <form action="" class="d-inline">
         <div class="d-flex">
-            <textarea id="comment-text" class="form-control m-1" placeholder="Type your comment here." oninput=countText() rows=2 style="resize:none"></textarea>
+            <textarea id="comment-text" class="form-control m-1" placeholder="Type your comment here."
+                oninput=countText() maxlength=200 rows=2 style="resize:none" required></textarea>
             <div class="d-flex flex-column" id="button-addon4">
-              <button id="submit-button" class="btn btn-outline-secondary mt-1" style="height:79px" type="button">Submit</button>
+                <button id="submit-button" class="btn btn-outline-secondary mt-1" style="height:79px"
+                    type="button">Submit</button>
+                <div id="the-count" style="float:right">
+                    <span id="current">0</span>
+                    <span id="maximum">/ 200</span>
+                </div>
             </div>
-          </div>
+        </div>
     </form>
-    <div id="the-count" style="float:right">
-        <span id="current">0</span>
-        <span id="maximum">/ 250</span>
-    </div>
-    <div id="comment-list">
+    <div id="comment-list" class="pt-2 px-3 ">
         {% include './comment_list.html' %}
     </div>
+
     {% if comments.has_other_pages %}
     <div class="pagination justify-content-center">
         {% if comments.has_previous %}
-            <a href="?page={{ comments.previous_page_number }}#comment-list" name="page"><</a>
+        <a href="?page={{ comments.previous_page_number }}#comment-list" name="page"></a>
         {% endif %}
         <p class="mx-2">{{ comments.number }} of {{ comments.paginator.num_pages }}</p>
         {% if comments.has_next %}
-            <a href="?page={{ comments.next_page_number }}#comment-list" name="page">></a>
+        <a href="?page={{ comments.next_page_number }}#comment-list" name="page">></a>
         {% endif %}
     </div>
     {% endif %}
