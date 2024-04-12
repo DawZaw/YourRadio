@@ -1,12 +1,13 @@
 <h2 class="text-dark mt-2">Comments</h2>
 <div class="col-10 m-auto">
-    <form action="" class="d-inline">
+    <form method="post" action="{% url 'comment:add_comment' %}?next=#comment-text" class="d-inline">
+        {% csrf_token %}
         <div class="d-flex">
-            <textarea id="comment-text" class="form-control m-1" placeholder="Type your comment here."
-                oninput=countText() maxlength=200 rows=2 style="resize:none" required></textarea>
+            <textarea id="comment-text" name="comment-text" class="form-control m-1" placeholder="{% if user.is_authenticated %} Type your comment here. {% else %} You must be logged in to comment. {% endif %}"
+                oninput=countText() maxlength=200 rows=2 style="resize:none; overflow: none;" required {% if not user.is_authenticated %} disabled {% endif %}></textarea>
             <div class="d-flex flex-column" id="button-addon4">
-                <button id="submit-button" class="btn btn-outline-secondary mt-1" style="height:79px"
-                    type="button">Submit</button>
+                <button id="submit-button" class="btn btn-outline-secondary mt-1" style="height:80px"
+                    type="submit" {% if not user.is_authenticated %} disabled {% endif %}>Submit</button>
                 <div id="the-count" style="float:right">
                     <span id="current">0</span>
                     <span id="maximum">/ 200</span>
@@ -17,11 +18,10 @@
     <div id="comment-list" class="pt-2 px-3 ">
         {% include './comment_list.html' %}
     </div>
-
     {% if comments.has_other_pages %}
     <div class="pagination justify-content-center">
         {% if comments.has_previous %}
-        <a href="?page={{ comments.previous_page_number }}#comment-list" name="page"></a>
+        <a href="?page={{ comments.previous_page_number }}#comment-list" name="page"><</a>
         {% endif %}
         <p class="mx-2">{{ comments.number }} of {{ comments.paginator.num_pages }}</p>
         {% if comments.has_next %}

@@ -12,3 +12,11 @@ function countText() {
     let text = document.getElementById('comment-text').value;
     document.getElementById('current').innerText = text.length;
 }
+
+$("comment-text").keypress(function (e) {
+    if(e.which === 13 && !e.shiftKey) {
+        e.preventDefault();
+    
+        $(this).closest("form").submit();
+    }
+});

@@ -40,10 +40,10 @@
             {% for album in siteuser.favorite_albums.all %}
             <a href="{% url 'artists:album_detail' album.artist.slug album.slug %}"
                 class="link-underline-dark link-underline-opacity-0">
-                <div id="album-card" class="card m-3" style="max-width: 14rem;">
+                <div class="album-card card m-3" style="max-width: 14rem;">
                     {% if user.is_authenticated and user == siteuser %}
                     <form class="float-button remove-button" method="post"
-                        action="{% url 'users:remove_album' user.id album.id  %}" data="artists:artists">
+                        action="{% url 'users:remove_album' user.id album.id %}">
                         {% csrf_token %}
                         <input type="image" class="icon" src="/static/img/minus-solid.svg" />
                     </form>
@@ -54,6 +54,7 @@
                     </div>
                     <div class="card-header">
                         <p class="m-0 text-truncate" style="max-width: 158px">{{ album.title }}</p>
+                        <p class="m-0 text-truncate" style="max-width: 158px">{{ album.artist }}</p>
                     </div>
                 </div>
             </a>

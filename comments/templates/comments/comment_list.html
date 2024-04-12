@@ -13,8 +13,11 @@
             <p class="d-flex justify-content-between">
                 <a href="{% url 'users:user_detail' comment.user %}"
                     class="text-light link-underline-light link-underline-opacity-0 link-underline-opacity-50-hover">
-                    <b>{{ comment.user.first_name }} {{ comment.user.last_name }}</b> <span class="opacity-50">@{{
-                        comment.user }}</span>
+                    <b>{{ comment.user.first_name }} {{ comment.user.last_name }}</b> 
+                    <br />
+                    <span class="opacity-50">
+                        @{{ comment.user }}
+                    </span>
                 </a>
                 <span>
                     {{ comment.date|date:"H:i A • M j, o" }}

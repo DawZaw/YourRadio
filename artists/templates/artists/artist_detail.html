@@ -48,23 +48,9 @@
     </div>
     <div class="row justify-content-center mt-2">
         <h2 class="text-dark">Discography</h2>
-        <div class="d-flex flex-row flex-wrap">
-            {% for album in artist.album.all %}
-            <a href="{% url 'artists:album_detail' album.artist.slug album.slug %}"
-                class="link-underline-dark link-underline-opacity-0">
-                <div class="card m-3" style="max-width: 14rem;">
-                    <div class="card-body p-0">
-                        <img src="/{{ album.cover }}" alt="{{ album.title }}" class="rounded-top"
-                            style="height:190px; width: 190px" loading="lazy">
-                    </div>
-                    <div class="card-header">
-                        <p class="m-0 text-truncate" style="max-width: 158px">{{ album.title }}</p>
-                    </div>
-                </div>
-            </a>
-            {% endfor %}
-        </div>
+        {% include 'artists/artist_discography.html' %}
     </div>
+    {% include 'partials/popup.html' %}
     {% include '../comments/comment_section.html' with comments=comments %}
 </div>
 {% endblock content %}

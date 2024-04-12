@@ -5,41 +5,12 @@
 {% for artist in artist_list %}
 {% if artist.album.all %}
 <h2>
-    <a href="{% url 'artists:artist_detail' artist.slug %}"
-        class="text-dark link-underline-dark link-underline-opacity-0 link-underline-opacity-50-hover">
+    <a id="{{ artist.slug }}" href="{% url 'artists:artist_detail' artist.slug %}"
+        class="text-dark link-underline-dark link-underline-opacity-0 link-underline-opacity-50-hover" style="padding-top: 120px; outline: none;">
         {{ artist }}
     </a>
 </h2>
-<div class="d-flex flex-row flex-wrap">
-    {% for album in artist.album.all %}
-    <a href="{% url 'artists:album_detail' album.artist.slug album.slug %}"
-        class="link-underline-dark link-underline-opacity-0">
-        <div id="album-card" class="card m-3" style="max-width: 14rem;">
-            {% if user.is_authenticated %}
-            {% if album in user.favorite_albums.all %}
-            <form class="float-button remove-button" method="post"
-                action="{% url 'users:remove_album' user.id album.id  %}" data="artists:artists">
-                {% csrf_token %}
-                <input type="image" class="icon" src="/static/img/minus-solid.svg" />
-            </form>
-            {% else %}
-            <form class="float-button add-button" method="post" action="{% url 'users:add_album' user.id album.id %}">
-                {% csrf_token %}
-                <input type="image" class="icon" src="/static/img/plus-solid.svg" />
-            </form>
-            {% endif %}
-            {% endif %}
-            <div class="card-body p-0">
-                <img src="/{{ album.cover }}" alt="{{ album.title }}" class="rounded-top"
-                    style="height:190px; width: 190px" loading="lazy">
-            </div>
-            <div class="card-header">
-                <p class="m-0 text-truncate" style="max-width: 158px">{{ album.title }}</p>
-            </div>
-        </div>
-    </a>
-    {% endfor %}
-</div>
+{% include 'artists/artist_discography.html' %}
 {% endif %}
 {% endfor %}
 {% endblock content %}

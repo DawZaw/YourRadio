@@ -53,6 +53,8 @@
 }
 
 .icon {
+  position: absolute;
+  right: inherit;
   display: block;
   margin: auto;
   width: 40px;
@@ -72,7 +74,8 @@
   transition: all 300ms ease-in-out;
 }
 
-#album-card:hover .float-button {
+.album-cover:hover .float-button,
+.album-card:hover .float-button {
   opacity: 1;
   transition: all 300ms ease-in-out;
 }
@@ -100,6 +103,12 @@
   animation: fadeInOutAnimation ease 2s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
+}
+
+.form-control:focus {
+  outline: none;
+  box-shadow: none;
+  border: 1px #6c757d solid;
 }
 
 @keyframes fadeInOutAnimation {

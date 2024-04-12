@@ -8,3 +8,6 @@ class Comment(models.Model):
     post = models.TextField(max_length=250)
     date = models.DateTimeField(default=timezone.now)
     page = models.SlugField()
+    
+    class Meta:
+        ordering = ['-date']

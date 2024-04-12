@@ -27,4 +27,5 @@ urlpatterns = [
     path("users/", include("django.contrib.auth.urls")),
     path("users/", include("users.urls", namespace="users")),
     path("artists/", include("artists.urls", namespace="artists")),
+    path("comments/", include("comments.urls", namespace="comments")),
 ] + static(settings.ALBUM_MEDIA_URL, document_root=settings.ALBUM_MEDIA_ROOT)
