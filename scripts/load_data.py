@@ -31,7 +31,7 @@ def populate_artists():
                 name=row[0],
                 start_year=start_year,
                 end_year=end_year,
-                photo="artists/media/images/artists/"
+                photo="static/artists/"
                 + slugify(f"{row[0]}", allow_unicode=True)
                 + ".jpg",
                 type=row[3],
@@ -52,7 +52,7 @@ def populate_albums():
                 title=row[0],
                 artist=artist,
                 release_date=release_date,
-                cover="artists/media/images/albums/"
+                cover="static/albums/"
                 + slugify(f"{row[1]}-{tmp_title}", allow_unicode=True)
                 + ".webp",
                 slug=slugify(tmp_title, allow_unicode=True),

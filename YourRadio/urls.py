@@ -16,8 +16,9 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, re_path, include
 from django.conf.urls.static import static
+from django.views.generic.base import RedirectView
 from YourRadio import views
 from . import settings
 
