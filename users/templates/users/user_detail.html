@@ -63,4 +63,6 @@
         {% endif %}
     </div>
 </div>
+{% include 'partials/popup.html' %}
+{% include '../comments/comment_section.html' with comments=comments %}
 {% endblock content %}

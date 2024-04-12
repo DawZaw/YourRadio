@@ -10,7 +10,10 @@ def add_comment(request, **kwargs):
         post = request.POST.get('comment-text')
         date = timezone.now()
         current_url = request.META.get("HTTP_REFERER")
-        page = "-".join(current_url.split('artists/')[1].split('/')[:-1])
+        try:
+            page = "-".join(current_url.split('artists/')[1].split('/')[:-1])
+        except IndexError:
+            page = "-".join(current_url.split('users/')[1].split('/')[:-1])
         Comment.objects.create(user=user, post=post, date=date, page=page)
         messages.info(request, "Comment has been added.")
     return HttpResponseRedirect(current_url)

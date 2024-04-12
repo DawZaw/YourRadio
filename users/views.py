@@ -3,10 +3,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.core.paginator import Paginator
 from django.views.generic import ListView, DetailView, FormView
 from django.contrib.auth.forms import UserCreationForm
 import datetime
 
+from comments.models import Comment
 from artists.models import Album
 from .forms import RegisterUserForm
 from .models import SiteUser
@@ -22,6 +24,7 @@ class UsersListView(ListView):
     def get_queryset(self):
         return SiteUser.objects.exclude(is_superuser=True)
 
+from django.utils.text import slugify
 
 class UserDetailView(DetailView):
     model = SiteUser
@@ -44,6 +47,15 @@ class UserDetailView(DetailView):
         context["favorite_genres"] = sorted(
             genres_count, key=lambda item: item[1], reverse=True
         )[:4]
+        
+        # Comment section
+        slug = slugify(self.get_object())
+        comments = Comment.objects.filter(page=slug)
+        paginator = Paginator(comments, 5)
+        page = self.request.GET.get("page", 1)
+        comments = paginator.get_page(page)
+        context["comments"] = comments
+        
         return context
 
 
